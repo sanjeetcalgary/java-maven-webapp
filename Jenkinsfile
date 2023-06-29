@@ -35,8 +35,8 @@ pipeline{
             }
         }
 
-        stage('Build image'){
-            step{
+        stage('build image'){
+            steps{
                 echo '*********Docker image**********'
             }
         }
