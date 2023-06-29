@@ -18,31 +18,31 @@ pipeline{
         }
 
         stage('package'){
-            step{
+            steps{
                 echo '*********package goal before build**********'
             }
         }
 
         stage('test'){
-            step{
+            steps{
                 echo '*********Docker image to nexus**********'
             }
         }
 
         stage('deploy'){
-            step{
+            steps{
                 echo '*********Upload the snapshot to nexus**********'
             }
         }
 
-        stage('Build image'){
+        stages('Build image'){
             step{
                 echo '*********Docker image**********'
             }
         }
 
         stage('upload image'){
-            step{
+            steps{
                 echo '*********Docker image to nexus**********'
             }
         }
