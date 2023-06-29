@@ -6,7 +6,7 @@
 
     <groupId>maven-java-app</groupId>
     <artifactId>java-maven-app</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.4-SNAPSHOT</version>
 
     <build>
         <pluginManagement>
