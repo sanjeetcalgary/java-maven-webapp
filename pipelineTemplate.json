@@ -1,0 +1,39 @@
+pipeline {
+    //agent block- node
+    // any- no node block needed
+    agent <any> {
+        node {
+            label ' '
+        }
+    }
+    //tools bloc- global configured tools
+    tools {
+    }
+    //options block- config
+    options {
+        buildDiscarder logRotator( 
+                    daysToKeepStr: '15', 
+                    numToKeepStr: '10'
+            )
+    }
+    // parameters block
+    parameters {
+    }
+    //environment var
+    environment {
+        APP_NAME = "DCUBE_APP",
+        APP_ENV  = "DEV"
+    }
+    //stages- checkout, build, test, deploy, cleanup
+    stages {        
+        //step
+        stage('name of stage') {
+            steps {
+            }
+        }
+    }
+    // exception handling
+    post {
+
+    }
+}
