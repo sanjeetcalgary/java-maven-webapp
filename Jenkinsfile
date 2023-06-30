@@ -7,6 +7,7 @@ pipeline{
 
     tools {
         maven 'slave-mvn'
+        git 'slave-git'
     }
 
     environment {
