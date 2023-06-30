@@ -35,13 +35,7 @@ pipeline{
             steps {
                 sh 'mvn clean package'
             }
-        }
-
-        stage('Publish test result') {
-            steps {
-
-            }
-        }        
+        }     
     }
     post{
         always{
