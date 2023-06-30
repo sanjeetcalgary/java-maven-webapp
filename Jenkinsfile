@@ -10,7 +10,8 @@ pipeline{
     }
 
     environment {
-        BRANCH= "pipeline"
+        DOCKER_USER = credentials('dockerid')
+        DOCKER_PASSWORD = credentials('dockerpwd')
     }
 
     stages {
@@ -22,20 +23,29 @@ pipeline{
             }
         }
         
-        stage('Checkout code') {
+        stage('Build jar file') {
             steps {
-                git(
-                    url: "https://github.com/sanjeetcalgary/java-maven-webapp.git",
-                    branch: "${env.BRANCH}"
-                )
+                echo "Building jar"
+                sh 'mvn clean package'
+            }
+        } 
+
+        stage('Build docker image') {
+            steps {
+                echo "Building docker image"
+                sh "docker build -t sanjeetkr/java-app:v2.1 ."
+                sh "docker login -u $DOCKER_USER -p $DOCKER_PASSWORD"
+                sh "docker push sanjeetkr/java-app:v2.1"
             }
         }
 
-        stage('Code build') {
+        stage('Deploy the image') {
             steps {
-                sh 'mvn clean package'
+                echo "Deployment phase"
             }
-        }     
+        }
+
+
     }
     post{
         always{
