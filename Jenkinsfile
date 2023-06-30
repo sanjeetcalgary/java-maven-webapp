@@ -21,10 +21,16 @@ pipeline{
             steps {
                 echo "Building jar"
                 sh 'mvn clean package'
+                echo "executin pipeline for branch= $BRANCH_NAME"
             }
         } 
 
         stage('Build docker image') {
+            when {
+                expression {
+                    BRANCH_NAME == 'pipeline'
+                }
+            }
             steps {
                 echo "Building docker image"
                 sh "docker build -t sanjeetkr/java-app:v2.1 ."
@@ -34,6 +40,11 @@ pipeline{
         }
 
         stage('Deploy the image') {
+            when {
+                expression {
+                    BRANCH_NAME == 'pipeline'
+                }
+            }
             steps {
                 echo "Deployment phase"
             }
