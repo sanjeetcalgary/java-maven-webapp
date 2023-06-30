@@ -26,7 +26,7 @@ pipeline{
             steps {
                 git(
                     url: "https://github.com/sanjeetcalgary/java-maven-webapp.git",
-                    branch: ${env.BRANCH}
+                    branch: "${env.BRANCH}"
                 )
             }
         }
