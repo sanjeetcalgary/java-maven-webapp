@@ -15,13 +15,6 @@ pipeline{
     }
 
     stages {
-
-        stage('Cleanup workspace') {
-            steps {
-                cleanWS()
-                echo "Cleaned workspace for ${APP_NAME}"
-            }
-        }
         
         stage('Build jar file') {
             steps {
