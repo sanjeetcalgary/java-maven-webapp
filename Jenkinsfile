@@ -10,7 +10,7 @@ pipeline{
     }
 
     environment {
-
+        BRANCH: "pipeline"
     }
 
     stages {
@@ -26,7 +26,7 @@ pipeline{
             steps {
                 git(
                     url: "https://github.com/sanjeetcalgary/java-maven-webapp.git",
-                    branch: "pipeline"
+                    branch: ${env.BRANCH}
                 )
             }
         }
@@ -46,7 +46,7 @@ pipeline{
     post{
         always{
             echo "Publishing test result"
-            junit: "**/target/surefire-reports/*.xml"
+            junit "**/target/surefire-reports/*.xml"
         }
     } 
     
