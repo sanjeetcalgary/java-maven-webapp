@@ -9,42 +9,50 @@ pipeline{
         maven 'slave-mvn'
     }
 
+    environment {
+
+    }
+
     stages {
 
-        stage('cleanup'){
-            steps{
-                echo '*********cleanup before build**********'
+        stage('Cleanup workspace') {
+            steps {
+                cleanWS()
+                echo "Cleaned workspace for ${APP_NAME}"
+            }
+        }
+        
+        stage('Checkout code') {
+            steps {
+                git(
+                    url: "https://github.com/sanjeetcalgary/java-maven-webapp.git",
+                    branch: "pipeline"
+                )
             }
         }
 
-        stage('package'){
-            steps{
-                echo '*********package goal before build**********'
+        stage('Code build') {
+            steps {
+                sh 'mvn clean package'
             }
         }
 
-        stage('test'){
-            steps{
-                echo '*********Docker image to nexus**********'
+        stage('Publish test result') {
+            steps {
+
             }
         }
 
-        stage('deploy'){
-            steps{
-                echo '*********Upload the snapshot to nexus**********'
+        post{
+            always{
+                echo "Publishing test result"
+                junit: "**/target/surefire-reports/*.xml"
             }
-        }
+        } 
 
-        stage('build image'){
-            steps{
-                echo '*********Docker image**********'
-            }
-        }
+        
 
-        stage('upload image'){
-            steps{
-                echo '*********Docker image to nexus**********'
-            }
-        }
     }
+
+    
 }
