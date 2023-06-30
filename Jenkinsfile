@@ -10,7 +10,7 @@ pipeline{
     }
 
     environment {
-        BRANCH: "pipeline"
+        BRANCH= "pipeline"
     }
 
     stages {
