@@ -41,18 +41,13 @@ pipeline{
             steps {
 
             }
-        }
-
-        post{
-            always{
-                echo "Publishing test result"
-                junit: "**/target/surefire-reports/*.xml"
-            }
-        } 
-
-        
-
+        }        
     }
-
+    post{
+        always{
+            echo "Publishing test result"
+            junit: "**/target/surefire-reports/*.xml"
+        }
+    } 
     
 }
